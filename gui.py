@@ -13,13 +13,17 @@ class gui_system():
         menu=tk.Menu(self.root)
         
         menu.add_cascade(label="File")
-        menu.add_cascade(label="Edit")
 
         self.root.config(menu=menu)
 
     def layout(self):
-        tk.Button(text="Greyscale").pack(side=tk.LEFT)
-        tk.Button(text="Blur").pack(side=tk.LEFT)
-        tk.Button(text="Edges").pack(side=tk.LEFT)
-        tk.Button(text="Rotate").pack(side=tk.LEFT)
-        tk.Button(text="Flip").pack(side=tk.LEFT)
+        main=tk.Frame(self.root)
+        main.pack(fill=tk.BOTH, expand=True)
+        panel=tk.Frame(main)
+        panel.pack(side=tk.BOTTOM)
+
+        tk.Button(panel, text="Greyscale").pack(side=tk.LEFT, padx=15, pady=15)
+        tk.Button(panel, text="Blur").pack(side=tk.LEFT, padx=15, pady=15)
+        tk.Button(panel, text="Edges").pack(side=tk.LEFT, padx=15, pady=15)
+        tk.Button(panel, text="Rotate").pack(side=tk.LEFT, padx=15, pady=15)
+        tk.Button(panel, text="Flip").pack(side=tk.LEFT, padx=15, pady=15)
