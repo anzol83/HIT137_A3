@@ -32,11 +32,11 @@ class Functions:
     def rotate_90(self, angle=90):
        if self.processor.image is None:
             return
-        self.history.save(self.processor.image)
-        self.processor.image = self.processor.rotate(angle=angle)
-        self.processor.original = self.processor.image.copy()
-        self.display(self.processor.image)
-        # to do
+       self.history.save(self.processor.image)
+       self.processor.image = self.processor.rotate(angle=angle)
+       self.processor.original = self.processor.image.copy()
+       self.display(self.processor.image)
+
     def flip_horizontal(self, mode=True):
         if self.processor.image is None:
             return

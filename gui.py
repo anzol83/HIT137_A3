@@ -34,11 +34,3 @@ class gui_system():
         self.canvas=tk.Canvas(canvas_frame, bg="black")
         self.canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-    def status(self):
-        #to do
-    def display(self):
-        #to do
-    def saveas(self):
-        #to do
-
-
