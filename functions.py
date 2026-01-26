@@ -9,25 +9,53 @@ class Functions:
         if self.processor.image is None:
             return
         self.history.save(self.processor.image)
-        self.processor.image = self.processor.grayscale()
-        self.processor.original = self.processor.image.copy()
-        self.display_callback(self.processor.image)
-        # to do
+
+        
     def blur(self):
+        if self.processor.image is None:
+            return
+        self.history.save(self.processor.image)
+
 
     def edges(self):
+        if self.processor.image is None:
+            return
+        self.history.save(self.processor.image)
+
 
     def rotate_90(self):
+       if self.processor.image is None:
+            return
+        self.history.save(self.processor.image)
+       
         # to do
     def flip_horizontal(self):
+        if self.processor.image is None:
+            return
+        self.history.save(self.processor.image)
+
 
     def brightness(self):
-        # to do
+        if self.processor.image is None:
+            return
+        self.history.save(self.processor.image)
+        
+        
     def scale(self):
+        if self.processor.image is None:
+            return
+        self.history.save(self.processor.image)
+
 
     def undo(self):
-        # to do
+        if self.processor.image is None:
+            return
+        self.history.save(self.processor.image)
+
+        
     def redo(self):
-    
+        if self.processor.image is None:
+            return
+        self.history.save(self.processor.image)
 
     
