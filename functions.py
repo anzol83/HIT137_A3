@@ -29,15 +29,15 @@ class Functions:
         self.processor.original = self.processor.image.copy()
         self.display(self.processor.image)
 
-    def rotate_90(self, angle=90):
+    def rotate_90(self, angle):
        if self.processor.image is None:
             return
        self.history.save(self.processor.image)
-       self.processor.image = self.processor.rotate(angle=angle)
+       self.processor.image = self.processor.rotate(angle)
        self.processor.original = self.processor.image.copy()
        self.display(self.processor.image)
 
-    def flip_horizontal(self, mode=True):
+    def flip_horizontal(self, mode):
         if self.processor.image is None:
             return
         self.history.save(self.processor.image)
@@ -49,9 +49,9 @@ class Functions:
     def brightness(self, value):
         if self.processor.image is None:
             return
-        self.history.save(self.processor.image)
         self.processor.brightness_value = int(value)
-        
+        img = self.processor.apply_all()
+        self.display(img)
         
     def scale(self, value):
         if self.processor.image is None:
@@ -63,7 +63,6 @@ class Functions:
     def undo(self):
         if self.processor.image is None:
             return
-        self.history.save(self.processor.image)
         self.processor.image = self.history.undo(self.processor.image)
         img = self.processor.apply_all()
         self.display(img)
@@ -72,7 +71,6 @@ class Functions:
     def redo(self):
         if self.processor.image is None:
             return
-        self.history.save(self.processor.image)
         self.processor.image = self.history.redo(self.processor.image)
         self.processor.original = self.processor.image.copy()
         self.display(self.processor.image)
