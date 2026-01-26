@@ -10,54 +10,63 @@ class Functions:
             return
         self.history.save(self.processor.image)
         self.processor.image = self.processor.grayscale()
-
+        self.processor.original = self.processor.image.copy()
+        self.display(self.processor.image)
         
     def blur(self):
         if self.processor.image is None:
             return
         self.history.save(self.processor.image)
         self.processor.image = self.processor.blur()
-
+        self.processor.original = self.processor.image.copy()
+        self.display(self.processor.image)
 
     def edges(self):
         if self.processor.image is None:
             return
         self.history.save(self.processor.image)
         self.processor.image = self.processor.edges()
+        self.processor.original = self.processor.image.copy()
+        self.display(self.processor.image)
 
-
-    def rotate_90(self):
+    def rotate_90(self, angle=90):
        if self.processor.image is None:
             return
         self.history.save(self.processor.image)
-        self.processor.image = self.processor.rotate(angle=90)
-       
+        self.processor.image = self.processor.rotate(angle=angle)
+        self.processor.original = self.processor.image.copy()
+        self.display(self.processor.image)
         # to do
-    def flip_horizontal(self):
+    def flip_horizontal(self, mode=True):
         if self.processor.image is None:
             return
         self.history.save(self.processor.image)
         self.processor.image = self.processor.flip(horizontal=True)
+        self.processor.original = self.processor.image.copy()
+        self.display(self.processor.image)
 
 
-    def brightness(self):
+    def brightness(self, value):
         if self.processor.image is None:
             return
         self.history.save(self.processor.image)
         self.processor.brightness_value = int(value)
-
         
-    def scale(self):
+        
+    def scale(self, value):
         if self.processor.image is None:
             return
         self.processor.scale_value = int(value) / 100
-
+        img = self.processor.apply_all()
+        self.display(img)
 
     def undo(self):
         if self.processor.image is None:
             return
         self.history.save(self.processor.image)
         self.processor.image = self.history.undo(self.processor.image)
+        img = self.processor.apply_all()
+        self.display(img)
 
 
     def redo(self):
@@ -65,4 +74,5 @@ class Functions:
             return
         self.history.save(self.processor.image)
         self.processor.image = self.history.redo(self.processor.image)
-        
+        self.processor.original = self.processor.image.copy()
+        self.display(self.processor.image)
