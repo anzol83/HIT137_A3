@@ -16,16 +16,20 @@ class gui_system():
         self.layout()
     
     def window(self):
-        menu=tk.Menu(self.root)
-        
-        file_menu=tk.Menu(menu, tearoff=0)
-        file_menu.add_command(label="Open")
-        file_menu.add_command(label="Save As")
-        file_menu.add_command(label="Exit")
+        menu = tk.Menu(self.root)
 
-        menu.add_cascade(label="File")
-        menu.add_cascade(label="Edit")
+        file_menu = tk.Menu(menu, tearoff=0)
+        file_menu.add_command(label="Open", command=self.run)
+        file_menu.add_command(label="Save As", command=self.run)
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", command=self.run)
 
+        edit_menu=tk.Menu(menu, tearoff=0)
+        edit_menu.add_command(label="Undo", command=self.run)
+        edit_menu.add_command(label="Redo", command=self.run)
+
+        menu.add_cascade(label="File", menu=file_menu)
+        menu.add_cascade(label="Edit", menu=edit_menu)
         self.root.config(menu=menu)
 
     def layout(self):
@@ -65,3 +69,6 @@ class gui_system():
         self.canvas.create_image(10, 10, anchor=tk.NW, image=self.tk_img)
         self.last_displayed_image=img
         return img
+    
+    def run(self):
+        return print("this is a test")
