@@ -10,7 +10,7 @@ class gui_system():
         self.root.title("Image Editor")
         self.root.geometry("600x400")
 
-        self.func=Functions(self.display)
+        self.func=Functions(self, self, self.display)
         
         self.window()
         self.layout()
