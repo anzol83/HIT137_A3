@@ -12,6 +12,11 @@ class gui_system():
     def window(self):
         menu=tk.Menu(self.root)
         
+        file_menu=tk.Menu(menu, tearoff=0)
+        file_menu.add_cascade(label="open")
+        file_menu.add_cascade(label="Save As")
+        file_menu.add_cascade(label="Exit")
+        
         menu.add_cascade(label="File")
 
         self.root.config(menu=menu)
