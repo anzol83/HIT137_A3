@@ -73,11 +73,36 @@ class gui_system():
         return img
 
     def status_bar(self):
-        self.status = tk.Label(self.root, text="No image loaded",
+        self.status=tk.Label(self.root, text="No image loaded",
                                bd=1, relief=tk.SUNKEN, anchor=tk.W)
         self.status.pack(side=tk.BOTTOM, fill=tk.X)
 
+    def display(self, img):
+        if len(img.shape)==2:
+            img=cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+        else:
+            img=cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
+        im=Image.fromarray(img)
+        self.tk_img=ImageTk.PhotoImage(im)
+
+        self.canvas.delete("all")
+        self.canvas.create_image(10, 10, anchor=tk.NW, image=self.tk_img)
+        self.last_displayed_image=img
+        return img
+
+    def open_image(self):
+        path=filedialog.askopenfilename(
+            filetypes=[("Images", "*.jpg *.png *.bmp")]
+        )
+        if path:
+            img=self.load_image(path)
+
+            self.display(img)
+
+            h, w=img.shape[:2]
+            self.status.config(text=f"{path} | {w} x {h}")
+            
     def run(self):
         return print("this is a test")
     
