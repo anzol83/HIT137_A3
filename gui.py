@@ -2,6 +2,7 @@ import tkinter as tk
 import cv2
 from PIL import Image, ImageTk
 
+from tkinter import filedialog, messagebox
 from functions import Functions
 
 class gui_system():
@@ -14,12 +15,13 @@ class gui_system():
         
         self.window()
         self.layout()
-    
+        self.status_bar()
+
     def window(self):
         menu = tk.Menu(self.root)
 
         file_menu = tk.Menu(menu, tearoff=0)
-        file_menu.add_command(label="Open", command=self.run)
+        file_menu.add_command(label="Open", command=self.open_image)
         file_menu.add_command(label="Save As", command=self.run)
         file_menu.add_separator()
         file_menu.add_command(label="Exit", command=self.run)
@@ -38,7 +40,7 @@ class gui_system():
         panel=tk.Frame(main, width=200)
         panel.pack(side=tk.LEFT, fill=tk.Y)
 
-        tk.Button(panel, text="Greyscale").pack(fill=tk.X, padx=15, pady=5)
+        tk.Button(panel, text="Greyscale", command=self.func.grayscale).pack(fill=tk.X, padx=15, pady=5)
         tk.Button(panel, text="Blur").pack(fill=tk.X, padx=15, pady=5)
         tk.Button(panel, text="Edges").pack(fill=tk.X, padx=15, pady=5)
         tk.Button(panel, text="Rotate 90°").pack(fill=tk.X, padx=10, pady=5)
@@ -57,10 +59,10 @@ class gui_system():
 
     def display(self, img):
 
-        if len(img.shape) == 2:
-            img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+        if len(img.shape)==2:
+            img=cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
         else:
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            img=cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
         im = Image.fromarray(img)
         self.tk_img = ImageTk.PhotoImage(im)
@@ -69,6 +71,25 @@ class gui_system():
         self.canvas.create_image(10, 10, anchor=tk.NW, image=self.tk_img)
         self.last_displayed_image=img
         return img
-    
+
+    def status_bar(self):
+        self.status = tk.Label(self.root, text="No image loaded",
+                               bd=1, relief=tk.SUNKEN, anchor=tk.W)
+        self.status.pack(side=tk.BOTTOM, fill=tk.X)
+
+
     def run(self):
         return print("this is a test")
+    
+    def load_image(self, path):
+        self.image=cv2.imread(path)
+        if self.image is None:
+            raise ValueError("Failed to load image")
+
+        self.original=self.image.copy()
+        self.filename=path
+
+        self.brightness_value=0
+        self.scale_value=1.0
+
+        return self.image
