@@ -52,7 +52,7 @@ class gui_system():
         self.canvas=tk.Canvas(canvas_frame, bg="black")
         self.canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-        slider=tk.Frame(canvas_frame, height=80, bg="#dddddd")
+        slider=tk.Frame(main, bg="#dddddd")
         slider.pack(side=tk.TOP, fill=tk.Y)
 
         self.slider = tk.Scale(panel, from_=0, to=100, label="Brightness",
