@@ -68,11 +68,6 @@ class gui_system():
         self.scale.set(100)
         self.scale.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
 
-    def create_status_bar(self):
-        self.status = tk.Label(self.root, text="No image loaded",
-                               bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        self.status.pack(side=tk.BOTTOM, fill=tk.X)
-
     def display(self, img):
 
         if len(img.shape)==2:
