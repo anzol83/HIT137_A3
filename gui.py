@@ -55,21 +55,15 @@ class gui_system():
         slider=tk.Frame(canvas_frame, height=80, bg="#dddddd")
         slider.pack(side=tk.TOP, fill=tk.Y)
 
-        self.slider = tk.Scale(slider, from_=-100, to=100,
-                                orient=tk.VERTICAL,
-                                label="Brightness",
-                                command=self.run)
-        self.slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
+        self.slider = tk.Scale(panel, from_=0, to=100, label="Brightness",
+                               orient=tk.HORIZONTAL, command=self.run)
+        self.slider.pack(fill=tk.X)
 
-        self.scale=tk.Scale(slider, from_=10, to=200,
-                                        orient=tk.VERTICAL,
-                                        label="Scale (%)",
-                                        command=self.run)
-        self.scale.set(100)
-        self.scale.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
+        self.slider = tk.Scale(panel, from_=0, to=100, label="Scale %",
+                               orient=tk.HORIZONTAL, command=self.run)
+        self.slider.pack(fill=tk.X)
 
     def display(self, img):
-
         if len(img.shape)==2:
             img=cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
         else:
