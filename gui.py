@@ -52,6 +52,22 @@ class gui_system():
         self.canvas=tk.Canvas(canvas_frame, bg="black")
         self.canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
+        slider=tk.Frame(canvas_frame, height=80, bg="#dddddd")
+        slider.pack(side=tk.TOP, fill=tk.Y)
+
+        self.slider = tk.Scale(slider, from_=-100, to=100,
+                                orient=tk.VERTICAL,
+                                label="Brightness",
+                                command=self.run)
+        self.slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
+
+        self.scale=tk.Scale(slider, from_=10, to=200,
+                                        orient=tk.VERTICAL,
+                                        label="Scale (%)",
+                                        command=self.run)
+        self.scale.set(100)
+        self.scale.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
+
     def create_status_bar(self):
         self.status = tk.Label(self.root, text="No image loaded",
                                bd=1, relief=tk.SUNKEN, anchor=tk.W)
