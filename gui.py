@@ -58,13 +58,13 @@ class gui_system():
         self.slider=tk.Scale(slider_panel, from_=-100, to=100,
                                 orient=tk.HORIZONTAL,
                                 label="Brightness",
-                                command=self.func.adjust_brightness)
+                                command=self.run)
         self.slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
 
         self.scale_slider = tk.Scale(slider_panel, from_=10, to=200,
                                         orient=tk.HORIZONTAL,
                                         label="Scale (%)",
-                                        command=self.func.adjust_scale)
+                                        command=self.run)
         self.scale_slider.set(100)
         self.scale_slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
 
