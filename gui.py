@@ -49,19 +49,24 @@ class gui_system():
         canvas_frame=tk.Frame(main)
         canvas_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-        self.canvas=tk.Canvas(canvas_frame, bg="black")
+        self.canvas=tk.Canvas(canvas_frame, bg="lightgrey")
         self.canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-        slider=tk.Frame(main, bg="#dddddd")
-        slider.pack(side=tk.TOP, fill=tk.Y)
+        slider_panel=tk.Frame(canvas_frame, height=80, bg="#dddddd")
+        slider_panel.pack(side=tk.TOP, fill=tk.X)
 
-        self.slider = tk.Scale(panel, from_=0, to=100, label="Brightness",
-                               orient=tk.HORIZONTAL, command=self.run)
-        self.slider.pack(fill=tk.X)
+        self.slider=tk.Scale(slider_panel, from_=-100, to=100,
+                                orient=tk.HORIZONTAL,
+                                label="Brightness",
+                                command=self.func.adjust_brightness)
+        self.slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
 
-        self.slider = tk.Scale(panel, from_=0, to=100, label="Scale %",
-                               orient=tk.HORIZONTAL, command=self.run)
-        self.slider.pack(fill=tk.X)
+        self.scale_slider = tk.Scale(slider_panel, from_=10, to=200,
+                                        orient=tk.HORIZONTAL,
+                                        label="Scale (%)",
+                                        command=self.func.adjust_scale)
+        self.scale_slider.set(100)
+        self.scale_slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
 
     def display(self, img):
         if len(img.shape)==2:
