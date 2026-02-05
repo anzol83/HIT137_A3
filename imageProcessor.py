@@ -1,7 +1,7 @@
 import cv2
 
 class ImageProcessor:
-    """A simple OpenCV-based image processor for basic transformations."""
+    # A simple OpenCV-based image processor for basic transformations.
 
     def __init__(self):
         self.image = None
@@ -44,8 +44,9 @@ class ImageProcessor:
             return cv2.rotate(self.image, cv2.ROTATE_180)
         if angle == 270:
             return cv2.rotate(self.image, cv2.ROTATE_90_COUNTERCLOCKWISE)
-        
-        def flip(self, mode):
+        return self.image  # Return original if angle doesn't match
+
+    def flip(self, mode):
         return cv2.flip(self.image, mode)
 
     def resize(self, img, scale):      # to accept img first
