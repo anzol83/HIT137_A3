@@ -12,7 +12,8 @@ class Functions: # This class controls user actions and connects them to image p
         
     def grayscale(self):
         if self.processor.image is None: # If no image is loaded, do nothing
-            return messagebox.showwarning("Warning", "No image loaded.") #In case if no inmage is loaded, show a warning message
+            messagebox.showwarning("Warning", "No image loaded.") #In case if no inmage is loaded, show a warning message
+            return
         self.history.save(self.processor.image)  # Save current image so we can undo later
         self.processor.image = self.processor.grayscale() # Convert the image to grayscale
         self.processor.original = self.processor.image.copy() # Store a clean copy as the new original image
@@ -20,7 +21,8 @@ class Functions: # This class controls user actions and connects them to image p
         
     def blur(self):
         if self.processor.image is None:
-            return messagebox.showwarning("Warning", "No image loaded.")
+            messagebox.showwarning("Warning", "No image loaded.")
+            return
         self.history.save(self.processor.image) # Save current state before applying blur
         self.processor.image = self.processor.blur() # Apply blur effect
         self.processor.original = self.processor.image.copy() # Update original image after blur
@@ -28,7 +30,8 @@ class Functions: # This class controls user actions and connects them to image p
 
     def edges(self):
         if self.processor.image is None:
-            return messagebox.showwarning("Warning", "No image loaded.")
+            messagebox.showwarning("Warning", "No image loaded.")
+            return
         self.history.save(self.processor.image) # Save image for undo
         self.processor.image = self.processor.edges()  # Detect edges in the image
         self.processor.original = self.processor.image.copy() # Update original image
@@ -36,7 +39,8 @@ class Functions: # This class controls user actions and connects them to image p
 
     def rotate_90(self, angle):
        if self.processor.image is None:
-            return messagebox.showwarning("Warning", "No image loaded.")
+            messagebox.showwarning("Warning", "No image loaded.")
+            return
        self.history.save(self.processor.image) # Save current image before rotation
        self.processor.image = self.processor.rotate(angle) # Rotate the image by the specified angle
        self.processor.original = self.processor.image.copy() # Update original image after rotation
@@ -44,7 +48,8 @@ class Functions: # This class controls user actions and connects them to image p
 
     def flip_horizontal(self, mode):
         if self.processor.image is None:
-            return messagebox.showwarning("Warning", "No image loaded.")
+            messagebox.showwarning("Warning", "No image loaded.")
+            return
         self.history.save(self.processor.image) # Save current image before flipping
         self.processor.image = self.processor.flip(mode) # Flip the image horizontally
         self.processor.original = self.processor.image.copy() # Update original image after flip
@@ -53,21 +58,23 @@ class Functions: # This class controls user actions and connects them to image p
 
     def brightness(self, value):
         if self.processor.image is None:
-            return messagebox.showwarning("Warning", "No image loaded.")
+            return
         self.processor.brightness_value = int(value) / 100 # Set brightness level
         img = self.processor.apply_all() # Reapply all effects including brightness
         self.display(img) # Display the updated image
         
     def scale(self, value):
         if self.processor.image is None:
-            return messagebox.showwarning("Warning", "No image loaded.")
+            
+            return
         self.processor.scale_value = int(value) / 100 # Set scale level
         img = self.processor.apply_all() # Reapply all effects including scaling
         self.display(img) # Display the updated image
 
     def undo(self):
         if self.processor.image is None:
-            return messagebox.showwarning("Warning", "No image loaded.")
+            messagebox.showwarning("Warning", "No image loaded.")
+            return
         self.processor.image = self.history.undo(self.processor.image) # Revert to previous image state
         img = self.processor.apply_all() # Reapply all effects to the undone image
         self.display(img) # Display the undone image
@@ -75,7 +82,8 @@ class Functions: # This class controls user actions and connects them to image p
 
     def redo(self):
         if self.processor.image is None:
-            return messagebox.showwarning("Warning", "No image loaded.")
+            messagebox.showwarning("Warning", "No image loaded.")
+            return
         self.processor.image = self.history.redo(self.processor.image) # Reapply the next image state
         self.processor.original = self.processor.image.copy() # Update original image
         self.display(self.processor.image) # Display the redone image
