@@ -51,8 +51,8 @@ class gui_system:
         tk.Button(panel, text="Grayscale", command=self.function.grayscale).pack(fill=tk.X, padx=10, pady=5)
         tk.Button(panel, text="Blur", command=self.function.blur).pack(fill=tk.X, padx=10, pady=5)
         tk.Button(panel, text="Edges", command=self.function.edges).pack(fill=tk.X, padx=10, pady=5)
-        tk.Button(panel, text="Rotate 90°", command=lambda: self.function.rotate_90).pack(fill=tk.X, padx=10, pady=5)
-        tk.Button(panel, text="Flip Horizontal", command=lambda: self.function.flip_horizontal).pack(fill=tk.X, padx=10, pady=5)
+        tk.Button(panel, text="Rotate 90°", command=lambda: self.function.rotate_90(90)).pack(fill=tk.X, padx=10, pady=5)
+        tk.Button(panel, text="Flip Horizontal", command=lambda: self.function.flip_horizontal(1)).pack(fill=tk.X, padx=10, pady=5)
 
         canvas_frame = tk.Frame(main)
         canvas_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
