@@ -46,7 +46,7 @@ class Functions: # This class controls user actions and connects them to image p
         if self.processor.image is None:
             return messagebox.showwarning("Warning", "No image loaded.")
         self.history.save(self.processor.image) # Save current image before flipping
-        self.processor.image = self.processor.flip(horizontal=True) # Flip the image horizontally
+        self.processor.image = self.processor.flip(mode) # Flip the image horizontally
         self.processor.original = self.processor.image.copy() # Update original image after flip
         self.display(self.processor.image) # Display the flipped image
 

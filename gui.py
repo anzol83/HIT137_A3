@@ -10,8 +10,6 @@ class gui_system():
         self.root=root
         self.root.title("Image Editor")
         self.root.geometry("600x400")
-
-        self.func=Functions(self, self, self.display)
         
         self.window()
         self.layout()
@@ -40,7 +38,7 @@ class gui_system():
         panel=tk.Frame(main, width=200)
         panel.pack(side=tk.LEFT, fill=tk.Y)
 
-        tk.Button(panel, text="Greyscale", command=self.func.grayscale).pack(fill=tk.X, padx=15, pady=5)
+        tk.Button(panel, text="Greyscale", command=self.run).pack(fill=tk.X, padx=15, pady=5)
         tk.Button(panel, text="Blur").pack(fill=tk.X, padx=15, pady=5)
         tk.Button(panel, text="Edges").pack(fill=tk.X, padx=15, pady=5)
         tk.Button(panel, text="Rotate 90°").pack(fill=tk.X, padx=10, pady=5)
@@ -113,13 +111,13 @@ class gui_system():
             h, w=img.shape[:2]
             self.status.config(text=f"{path} | {w} x {h}")
             
-    def run(self):
-        return print("this is a test")
+    def run(self, value=None):
+        return print("this is a test", value)
     
     def load_image(self, path):
         self.image=cv2.imread(path)
         if self.image is None:
-            raise ValueError("Failed to load image")
+            return messagebox.showerror("Error!", "Failed to load image")
 
         self.original=self.image.copy()
         self.filename=path
