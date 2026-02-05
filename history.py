@@ -11,3 +11,9 @@ def save(self, image):
         return
     self.undo_stack.append(image.copy())
     self.redo_stack.clear()
+
+def undo(self, current):
+    if self.undo_stack and current is not None:
+        self.redo_stack.append(current)
+        return self.undo_stack.pop()
+    return current
