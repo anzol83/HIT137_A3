@@ -45,7 +45,22 @@ class History:
         return current
 
     def redo(self, current):
+        """
+        Reapply most recently undone image state
+
+        Current image is pushed to undo_stack
+        And most recent image from redo_stack is returned
+        
+        :param current: Current image state
+        :return: The redone image state
+                otherwise current image
+        """
+
         if self.redo_stack and current is not None:
+
+            #save current state for undo
             self.undo_stack.append(current)
+
+            #restore last undone state
             return self.redo_stack.pop()
         return current
