@@ -1,3 +1,10 @@
+"""
+This module contains the Functions class, which connects user actions from the GUI to image processing features.
+
+It applies image effects, updates the display, and manages undo and redo operations 
+while checking that an image is loaded before performing actions.
+"""
+
 from tkinter import messagebox
 
 class Functions: # This class controls user actions and connects them to image processing and display.
