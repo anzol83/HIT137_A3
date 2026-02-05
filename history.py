@@ -16,6 +16,11 @@ class History:
 
 
     def save(self, image):
+        """
+        Save current image to undo_stack
+
+        This is called whenever new change is made
+        """
         if image is None:
             return
         
@@ -31,9 +36,6 @@ class History:
         
         Current image is pushed to redo stack
         And most recent image state from undo stack is returned.
-        :param current: Current image state
-        :return: The previous image state if available,
-                 otherwise the current image
         """
         if self.undo_stack and current is not None:
 
@@ -50,10 +52,6 @@ class History:
 
         Current image is pushed to undo_stack
         And most recent image from redo_stack is returned
-        
-        :param current: Current image state
-        :return: The redone image state
-                otherwise current image
         """
 
         if self.redo_stack and current is not None:
