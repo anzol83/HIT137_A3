@@ -1,13 +1,18 @@
+#This is the main system for the application
+#Importing tkinter, PIL and cv2 (OpenCV) which are requirements of the assignment
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
 import cv2
 
+#We are importing all the module we created for the application here
+#This helps to easily call the functions and keep track of errors
 from imageProcessor import ImageProcessor
 from history import History
 from functions import Functions
 
-
+#Creating the GUI systemfor the app
+#This contains layout and menu for the user interaction
 class gui_system:
     def __init__(self, root):
         self.root = root
@@ -24,6 +29,8 @@ class gui_system:
         self.window()
         self.status_bar()
 
+    #This function cotains the menu bar
+    #Which contains options like open, save, exit and undo/redo fuctions
     def window(self):
         menu = tk.Menu(self.root)
 
@@ -41,6 +48,8 @@ class gui_system:
         menu.add_cascade(label="Edit", menu=edit_menu)
         self.root.config(menu=menu)
 
+    #This function contain the layout of the application, positions of buttons, sliders and canvas
+    #Each buttons are assigned for the respective functions (for eg: button "Grayscale" calls function "grayscale" from another module)
     def layout(self):
         main = tk.Frame(self.root)
         main.pack(fill=tk.BOTH, expand=True)
@@ -54,6 +63,7 @@ class gui_system:
         tk.Button(panel, text="Rotate 90°", command=lambda: self.function.rotate_90(90)).pack(fill=tk.X, padx=10, pady=5)
         tk.Button(panel, text="Flip Horizontal", command=lambda: self.function.flip_horizontal(1)).pack(fill=tk.X, padx=10, pady=5)
 
+        #adding canvas - part of window is seperated for image to load and display
         canvas_frame = tk.Frame(main)
         canvas_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
@@ -76,14 +86,16 @@ class gui_system:
         self.scale_slider.set(100)
         self.scale_slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=5)
 
-
+    #Status bar on the bottom of the window to show information while running the program
     def status_bar(self):
         self.status = tk.Label(self.root, text="No image loaded",
                                bd=1, relief=tk.SUNKEN, anchor=tk.W)
         self.status.pack(side=tk.BOTTOM, fill=tk.X)
 
+    #this function shows the image opened for edit
     def display(self, img):
-
+        #while openening the image for display the color are not matched by default
+        #cvtcolor function helps to disply that image in it's original form
         if len(img.shape) == 2:
             img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
         else:
@@ -94,9 +106,11 @@ class gui_system:
 
         self.canvas.delete("all")
         self.canvas.create_image(10, 10, anchor=tk.NW, image=self.tk_img)
+        #we used "last_displayed_image" as variable to keep track of the image edited 
         self.last_displayed_image=img
         return img
 
+    #This function opens the file explorer to get and load the image to display and edit
     def open_image(self):
         path = filedialog.askopenfilename(
             filetypes=[("Images", "*.jpg *.png *.bmp")]
@@ -113,7 +127,8 @@ class gui_system:
             h, w = img.shape[:2]
             self.status.config(text=f"{path} | {w} x {h}")
 
-
+    #finally when the image is edited the last_displayed_image is always the final edit
+    #we use that edited image to save to the desired path
     def save_image(self):
         if self.processor.image is None:
             return
