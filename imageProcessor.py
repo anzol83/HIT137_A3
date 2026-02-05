@@ -1,3 +1,10 @@
+"""
+This module contains the ImageProcessor class, which handles basic image processing operations using OpenCV.
+
+It loads images, applies effects like grayscale, blur, edge detection,brightness adjustment, rotation, flipping, and resizing,
+and keeps track of the original image so changes can be reapplied or reset easily.
+"""
+
 import cv2
 
 class ImageProcessor:
