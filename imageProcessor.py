@@ -47,3 +47,8 @@ class ImageProcessor:
         
         def flip(self, mode):
         return cv2.flip(self.image, mode)
+
+    def resize(self, img, scale):      # to accept img first
+        h, w = img.shape[:2]
+        new_w, new_h = int(w * scale), int(h * scale)
+        return cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_LINEAR)
