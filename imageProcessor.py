@@ -36,3 +36,11 @@ class ImageProcessor:
     
     def brightness(self, img, value):   # to accept img
         return cv2.convertScaleAbs(img, alpha=1, beta=value)
+    
+    def rotate(self, angle):
+        if angle == 90:
+            return cv2.rotate(self.image, cv2.ROTATE_90_CLOCKWISE)
+        if angle == 180:
+            return cv2.rotate(self.image, cv2.ROTATE_180)
+        if angle == 270:
+            return cv2.rotate(self.image, cv2.ROTATE_90_COUNTERCLOCKWISE)
