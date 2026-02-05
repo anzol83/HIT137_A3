@@ -8,7 +8,7 @@ class Functions: # This class controls user actions and connects them to image p
         # display_callback: function used to show the image on the screen
         self.processor = processor
         self.history = history
-        self.display_callback = display_callback
+        self.display = display_callback
         
     def grayscale(self):
         if self.processor.image is None: # If no image is loaded, do nothing
@@ -46,7 +46,7 @@ class Functions: # This class controls user actions and connects them to image p
         if self.processor.image is None:
             return messagebox.showwarning("Warning", "No image loaded.")
         self.history.save(self.processor.image) # Save current image before flipping
-        self.processor.image = self.processor.flip(horizontal=True) # Flip the image horizontally
+        self.processor.image = self.processor.flip(mode) # Flip the image horizontally
         self.processor.original = self.processor.image.copy() # Update original image after flip
         self.display(self.processor.image) # Display the flipped image
 
@@ -78,4 +78,4 @@ class Functions: # This class controls user actions and connects them to image p
             return messagebox.showwarning("Warning", "No image loaded.")
         self.processor.image = self.history.redo(self.processor.image) # Reapply the next image state
         self.processor.original = self.processor.image.copy() # Update original image
-        self.display(self.processor.image) # Display the redone image
+        self.display(self.processor.image) # Display the redone image 
