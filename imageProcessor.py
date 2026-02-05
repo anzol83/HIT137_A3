@@ -23,3 +23,6 @@ class ImageProcessor:
         self.scale_value = 1.0
 
         return self.image
+    
+    def grayscale(self): 
+        return cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
