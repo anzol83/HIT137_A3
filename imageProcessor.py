@@ -52,3 +52,15 @@ class ImageProcessor:
         h, w = img.shape[:2]
         new_w, new_h = int(w * scale), int(h * scale)
         return cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_LINEAR)
+    
+    def apply_all(self):
+        img = self.original.copy()     
+
+        if self.brightness_value != 0:
+            img = self.brightness(img, self.brightness_value)  
+
+        if self.scale_value != 1.0:
+            img = self.resize(img, self.scale_value)           
+
+        self.image = img
+        return img
