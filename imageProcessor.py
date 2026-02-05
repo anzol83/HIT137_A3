@@ -33,3 +33,6 @@ class ImageProcessor:
     def edges(self):
         gray = self.grayscale()
         return cv2.Canny(gray, 100, 200)
+    
+    def brightness(self, img, value):   # to accept img
+        return cv2.convertScaleAbs(img, alpha=1, beta=value)
