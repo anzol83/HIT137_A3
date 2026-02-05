@@ -44,3 +44,6 @@ class ImageProcessor:
             return cv2.rotate(self.image, cv2.ROTATE_180)
         if angle == 270:
             return cv2.rotate(self.image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+        
+        def flip(self, mode):
+        return cv2.flip(self.image, mode)
