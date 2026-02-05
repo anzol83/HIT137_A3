@@ -1,7 +1,14 @@
 """
-Adding saving, undo & redo option for editing
+This code contains a class for managing saving, undo and redo functionalities
 """
+
 class History:
+    """
+    This class has 2 stacks:
+    undo_stack stores previous image state for undo function
+    redo_stack stores undone image state for redo function
+    """
+
     def __init__(self):
         self.undo_stack = []
         self.redo_stack = []
