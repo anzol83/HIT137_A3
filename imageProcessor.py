@@ -26,3 +26,10 @@ class ImageProcessor:
     
     def grayscale(self): 
         return cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+    
+    def blur(self, k=11):
+        return cv2.GaussianBlur(self.image, (k, k), 0)
+
+    def edges(self):
+        gray = self.grayscale()
+        return cv2.Canny(gray, 100, 200)
